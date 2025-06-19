@@ -11,12 +11,12 @@ export default function DateChoice() {
   }
 
   return (
-    <div>
-      <h1 className='text-2xl font-bold mb-6'>ادخل تفاصيل الرحلة</h1>
-      <p className='mb-6'>اختر التاريخ، عدد المسافرين، ونوع الغرف.</p>
+    <div className=''>
+      <h1 className='text-2xl font-bold mb-6 md:px-0 px-6'>ادخل تفاصيل الرحلة</h1>
+      <p className='mb-6 md:px-0 px-6'>اختر التاريخ، عدد المسافرين، ونوع الغرف.</p>
 
       <div>
-        <h2 className='text-md font-medium mb-4'>تاريخ الذهاب والعودة</h2>
+        <h2 className='text-md font-medium mb-4 md:px-0 px-6'>تاريخ الذهاب والعودة</h2>
         {/* هذا هو الـClient Component */}
         <DateRangePickerClient onChange={handleDateChange} />
       </div>

@@ -4,7 +4,7 @@ import React from 'react'
 function HotelChoice() {
   return (
     <>
-        <div className='max-w-full'>
+        <div className='max-w-full md:px-0 px-6'>
           <h1 className='text-2xl font-bold mb-2 mt-12'>اختر فندقك المفضل</h1>
           <p className='mb-6'>نوفر لك مجموعة مختارة من أفضل الفنادق القريبة من الحرم المكي لتناسب جميع احتياجاتك</p>
             
@@ -21,7 +21,6 @@ function HotelChoice() {
     <div 
       style={{
         height: '200px',
-        width: '100%',
         position: 'relative',
         overflow: 'hidden',
         borderTopLeftRadius: '8px',

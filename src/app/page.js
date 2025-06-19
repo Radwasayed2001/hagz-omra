@@ -23,7 +23,7 @@ export default function Home() {
 
     <Transportation />
     <Details />
-    <div className="flex flex-wrap justify-between ps-4">
+    <div className="flex flex-wrap justify-between ">
     <TravellerNum />
     <RoomType />
     </div>

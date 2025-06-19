@@ -3,9 +3,9 @@ import React from 'react'
 function RoomType() {
   return (
     <>
-      <section className="bg-white lg:w-[45%]  w-full flex flex-col justify-center mb-8">
+      <section className="bg-white lg:w-[45%]  w-full flex flex-col justify-center mb-8  md:px-4 px-8">
         <h2  className='text-md font-medium mb-4'>نوع الغرفة</h2>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4  md:px-6 px-8">
 
           <div className="flex items-center w-[100%] justify-between">
             <p>غرفة مفردة</p>

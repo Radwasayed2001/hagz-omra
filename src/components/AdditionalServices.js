@@ -4,7 +4,7 @@ import React from 'react'
 function AdditionalServices() {
     return (
         <>
-            <div className='max-w-full'>
+            <div className='max-w-full md:px-0 px-6'>
                 <h1 className='text-2xl font-bold mb-2 mt-12'>خدمات إضافية لتحسين تجربتك</h1>
                 <p className='mb-6'>اختر من بين مجموعة من الخدمات التي تجعل رحلتك أكثر راحة وسهولة.</p>
             </div>

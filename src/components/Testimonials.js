@@ -8,9 +8,9 @@ function Testimonials() {
                 <p className="mt-1 text-center text-[#37322C] dark:text-neutral-400 text-lg">تعرّف على تجارب الحجاج والمعتمرين مع خدماتنا</p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-md:justify-center text-center max-lg:max-w-3xl max-md:max-w-lg mx-auto mt-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-md:justify-center text-center max-lg:max-w-3xl max-md:max-w-lg mx-auto mt-16 md:px-0 px-6">
                 <div>
-                    <div className='flex justify-between w-full items-center'>
+                    <div className='flex justify-between items-center'>
                         <div className="flex items-center gap-4">
                             <div className="w-[50px] h-[50px] rounded-full flex items-center justify-center overflow-hidden">
                                 <img src="/person1.png" className="w-[100px] h-[100px] rounded-full object-top object-contain mt-12" />

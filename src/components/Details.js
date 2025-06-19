@@ -3,7 +3,7 @@ import DateChoice from './DateChoice'
 
 function Details() {
   return (
-    <div>
+    <div >
       <DateChoice />
     </div>
   )

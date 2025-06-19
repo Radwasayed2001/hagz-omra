@@ -10,6 +10,9 @@ import RoomType from "@/components/RoomType";
 import HotelChoice from "@/components/HotelChoice";
 import AdditionalServices from "@/components/AdditionalServices";
 import FAQ from "@/components/FAQ";
+import Testimonials from "@/components/Testimonials";
+import WhyUs from "@/components/WhyUs";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -27,7 +30,15 @@ export default function Home() {
     <HotelChoice />
     <AdditionalServices />
     <FAQ />
+    
     </div>
+    <div className='mt-10 px-2' dir='rtl'>
+      
+    <Testimonials />
+
+    </div>
+    <WhyUs />
+    <Footer />
     </>
   );
 }

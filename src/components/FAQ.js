@@ -4,9 +4,9 @@ function FAQ() {
   return (
     <>
 <div className="max-w-full px-0 md:px-24 py-10 lg:py-14 mt-8">
-  <div className="max-w-2xltext-center mb-10 lg:mb-14">
+  <div className="mmb-10 lg:mb-14">
     <h2 className="text-3xl text-center font-bold md:text-5xl md:leading-tight text-[#0F1A24]">الأسئلة <span className='text-[#AE7639]'>الشائعة</span></h2>
-    <p className="mt-1 text-center text-gray-600 dark:text-neutral-400">إجابات على أكثر الأسئلة التي قد تخطر ببالك لتسهيل عملية الحجز.</p>
+    <p className="mt-1 text-center text-[#37322C] dark:text-neutral-400 text-lg">إجابات على أكثر الأسئلة التي قد تخطر ببالك لتسهيل عملية الحجز.</p>
   </div>
 
   <div className="">

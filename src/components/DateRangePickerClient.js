@@ -15,14 +15,20 @@ const DateRange = dynamic(
 
 export default function DateRangePickerClient({ onChange }) {
   const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      key: 'selection',
-    },
+    { startDate: new Date(), endDate: addDays(new Date(), 7), key: 'selection' },
   ]);
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
+
+  // track small screens
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 768px)');
+    const update = (e) => setIsMobile(e.matches);
+    update(mql);
+    mql.addEventListener('change', update);
+    return () => mql.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -45,7 +51,7 @@ export default function DateRangePickerClient({ onChange }) {
   )}`;
 
   return (
-    <div className="relative inline-block" ref={containerRef} dir="rtl">
+    <div className="relative inline-block w-full" ref={containerRef} dir="rtl">
       {/* Input Field */}
       <input
         type="text"
@@ -64,35 +70,16 @@ export default function DateRangePickerClient({ onChange }) {
             onChange={handleChange}
             moveRangeOnFirstSelection={false}
             months={2}
-            direction="horizontal"
+            direction={isMobile ? 'vertical' : 'horizontal'}
             ranges={range}
-            rangeColors={['#AE7639']} // Blue color for the range
+            rangeColors={['#AE7639']}
             className="!rounded-2xl !shadow-none !border-none !bg-transparent !p-4"
             locale={{
               localize: {
-                day: (n) => [
-                  'الأحد',
-                  'الاثنين',
-                  'الثلاثاء',
-                  'الأربعاء',
-                  'الخميس',
-                  'الجمعة',
-                  'السبت',
-                ][n],
-                month: (n) => [
-                  'يناير',
-                  'فبراير',
-                  'مارس',
-                  'أبريل',
-                  'مايو',
-                  'يونيو',
-                  'يوليو',
-                  'أغسطس',
-                  'سبتمبر',
-                  'أكتوبر',
-                  'نوفمبر',
-                  'ديسمبر',
-                ][n],
+                day: (n) =>
+                  ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'][n],
+                month: (n) =>
+                  ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][n],
               },
               options: { weekStartsOn: 6 },
             }}

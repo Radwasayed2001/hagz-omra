@@ -1,0 +1,56 @@
+/* Full picker wrapper is now transparent; we style in the JSX wrapper */
+
+/* Month header (عامود مايو 2025) */
+.rdrMonthAndYearPickers {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .rdrMonthAndYearPickers select {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Prev/Next arrows */
+  .rdrPprevButton, .rdrNextButton {
+    color: #555;
+  }
+  .rdrNextButton:hover, .rdrPrevButton:hover {
+    color: #AE7639;
+  }
+  
+  /* Weekday row */
+  .rdrWeekDays {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 0.5rem;
+  }
+  .rdrWeekDay {
+    font-size: 0.875rem;
+    color: #555;
+  }
+  
+  /* Day cells */
+  .rdrDayNumber span {
+    font-size: 0.875rem;
+    color: #333;
+  }
+  
+  /* Selected range styling */
+  .rdrDayHovered, .rdrDayPassive:not(.rdrDayDisabled) {
+    background-color: transparent;
+  }
+  .rdrSelected {
+    background-color: #AE7639 !important;
+    color: white !important;
+    border-radius: 0.5rem;
+  }
+  .rdrStartEdge, .rdrEndEdge {
+    background-color: #AE7639 !important;
+    color: white !important;
+  }
+  
+  /* Today highlight */
+  .rdrDayToday .rdrDayNumber span {
+    color: #AE7639;
+  }
+  

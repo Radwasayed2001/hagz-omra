@@ -11,7 +11,7 @@ export default function DateChoice() {
   }
 
   return (
-    <div className=''>
+    <div className='mt-8'>
       <h1 className='text-2xl font-bold mb-6 md:px-0 px-6'>ادخل تفاصيل الرحلة</h1>
       <p className='mb-6 md:px-0 px-6'>اختر التاريخ، عدد المسافرين، ونوع الغرف.</p>
 

@@ -1,5 +1,9 @@
+// src/components/TravellerNum.jsx
 'use client';
-import React, { useState } from 'react';
+
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTravellerCount } from '@/store/slices/travellersSlice';
 
 const categories = [
   {
@@ -8,7 +12,6 @@ const categories = [
     subtitle: '13 سنة فما فوق',
     icon: (
       <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* … adult SVG paths … */}
         <path d="M12.75 6.875C12.75 4.80393 11.071 3.125 9 3.125C6.92893 3.125 5.25 4.80393 5.25 6.875C5.25 8.94605 6.92893 10.625 9 10.625C11.071 10.625 12.75 8.94605 12.75 6.875Z" stroke="#37322C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M14.25 15.875C14.25 12.9755 11.8995 10.625 9 10.625C6.10051 10.625 3.75 12.9755 3.75 15.875" stroke="#37322C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
@@ -22,7 +25,6 @@ const categories = [
     subtitle: '2-12 سنة',
     icon: (
       <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* … children SVG paths … */}
         <path d="M2.625 8.75C2.00368 8.75 1.5 8.2463 1.5 7.625C1.5 7.00368 2.00368 6.5 2.625 6.5H3.18902C3.85509 3.91216 6.20424 2 9 2C11.7958 2 14.1449 3.91216 14.811 6.5H15C15.6213 6.5 16.125 7.00368 16.125 7.625C16.125 8.2463 15.6213 8.75 15 8.75H14.9536C14.5845 11.7097 12.0597 14 9 14C5.94029 14 3.41549 11.7097 3.04642 8.75H2.625Z" stroke="#37322C" strokeWidth="1.2" strokeLinejoin="round"/>
         <path d="M9 11.75C9.41422 11.75 9.75 11.4142 9.75 11H8.25C8.25 11.4142 8.58578 11.75 9 11.75Z" stroke="#37322C" strokeWidth="1.2" strokeLinejoin="round"/>
       </svg>
@@ -36,28 +38,28 @@ const categories = [
     subtitle: 'أقل من سنتين',
     icon: (
       <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* … infant SVG paths … */}
         <path d="M9 17C13.1421 17 16.5 13.6421 16.5 9.5C16.5 5.35786 13.1421 2 9 2C4.85786 2 1.5 5.35786 1.5 9.5C1.5 13.6421 4.85786 17 9 17Z" stroke="#37322C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M6.75 8V8.0075" stroke="#37322C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    unitPrice: 20, // assume free; won't display price anyway
+    unitPrice: 20,
     min: 0,
   },
 ];
 
 export default function TravellerNum() {
-  // initialize counts from the categories defaults
-  const initialCounts = categories.reduce((acc, { key, min }) => {
-    acc[key] = min;
-    return acc;
-  }, {});
-  const [counts, setCounts] = useState(initialCounts);
+  const dispatch = useDispatch();
+  const counts = useSelector(state => state.travellers);
 
-  const increment = (key) =>
-    setCounts((c) => ({ ...c, [key]: c[key] + 1 }));
-  const decrement = (key, min) =>
-    setCounts((c) => ({ ...c, [key]: Math.max(c[key] - 1, min) }));
+  const increment = (key) => {
+    const newCount = counts[key] + 1;
+    dispatch(setTravellerCount({ category: key, count: newCount }));
+  };
+
+  const decrement = (key, min) => {
+    const newCount = Math.max(counts[key] - 1, min);
+    dispatch(setTravellerCount({ category: key, count: newCount }));
+  };
 
   return (
     <section className="bg-white lg:w-[45%] w-full flex flex-col mb-4 md:px-4 px-8">
@@ -70,7 +72,6 @@ export default function TravellerNum() {
 
           return (
             <div key={key} className="flex items-center justify-between">
-              {/* Icon + Labels */}
               <div>
                 <div className="flex items-center gap-2">
                   {icon}
@@ -79,9 +80,7 @@ export default function TravellerNum() {
                 <p className="text-sm text-[#aaa]">{subtitle}</p>
               </div>
 
-              {/* Counter + Price */}
               <div className="flex items-center space-x-4">
-                {/* Decrement */}
                 <button
                   onClick={() => decrement(key, min)}
                   className="rounded-full w-[25px] h-[25px] flex items-center justify-center border border-gray-300"
@@ -91,10 +90,8 @@ export default function TravellerNum() {
                   </svg>
                 </button>
 
-                {/* Count */}
                 <span className="w-6 text-center">{count}</span>
 
-                {/* Increment */}
                 <button
                   onClick={() => increment(key)}
                   className="bg-[#AE7639] text-white rounded-full w-[25px] h-[25px] flex items-center justify-center"
@@ -104,7 +101,6 @@ export default function TravellerNum() {
                   </svg>
                 </button>
 
-                {/* Price */}
                 {showPrice && (
                   <span className="text-sm font-semibold text-[#AE7639]">
                     {total} ريال

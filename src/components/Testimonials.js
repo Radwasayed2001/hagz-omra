@@ -2,7 +2,7 @@ import React from 'react'
 
 function Testimonials() {
     return (
-        <div className='max-w-full px-0 md:px-24 py-10 lg:py-14 mt-8'>
+        <div className='max-w-full px-0 md:px-24 py-10 lg:py-14 mt-8' id='reviews'>
             <div className=" mb-10 lg:mb-14">
                 <h2 className="text-3xl text-center font-bold md:text-5xl md:leading-tight text-[#0F1A24]">آراء <span className='text-[#AE7639]'>عملائنا</span></h2>
                 <p className="mt-1 text-center text-[#37322C] dark:text-neutral-400 text-lg">تعرّف على تجارب الحجاج والمعتمرين مع خدماتنا</p>

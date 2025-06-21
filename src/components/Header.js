@@ -97,11 +97,7 @@ export default function Header() {
         {/* Mobile toggle button */}
         <button onClick={handleToggle} className="lg:hidden ml-6 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 fill-white" viewBox="0 0 20 20">
-            {menuOpen ? (
-              <path fillRule="evenodd" clipRule="evenodd" d="M10 8.586l4.95-4.95 1.414 1.414L11.414 10l4.95 4.95-1.414 1.414L10 11.414l-4.95 4.95-1.414-1.414L8.586 10l-4.95-4.95L5.05 3.636 10 8.586z" />
-            ) : (
-              <path fillRule="evenodd" clipRule="evenodd" d="M3 5h14v2H3V5zm0 4h14v2H3V9zm0 4h14v2H3v-2z" />
-            )}
+            {!menuOpen && <path fillRule="evenodd" clipRule="evenodd" d="M3 5h14v2H3V5zm0 4h14v2H3V9zm0 4h14v2H3v-2z" />}
           </svg>
         </button>
 
@@ -121,13 +117,17 @@ export default function Header() {
           </button>
 
           <ul className="lg:flex lg:gap-x-10 space-y-3 lg:space-y-0 mt-12 lg:mt-0 z-50 text-[#51586F] font-[700]">
-            {['الرئيسية', 'الأسئلة الشائعة', 'آراء العملاء'].map(item => (
+            {[
+    { label: 'الرئيسية', href: '/' },
+    { label: 'الأسئلة الشائعة', href: '#faq' },   // ← هنا
+    { label: 'آراء العملاء', href: '#reviews' },
+  ].map(item => (
               <li
                 key={item}
                 className="border-b border-gray-100 py-3 lg:border-none lg:py-0 relative lg:after:absolute lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300 lg:after:bg-white lg:after:w-0"
               >
-                <Link href="#" className="text-white block text-[15px] font-normal">
-                  {item}
+                <Link href={item.href} className="text-white block text-[15px] font-normal">
+                  {item.label}
                 </Link>
               </li>
             ))}

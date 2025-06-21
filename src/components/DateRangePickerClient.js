@@ -1,9 +1,11 @@
-// components/DateRangePickerClient.jsx
+// src/components/DateRangePickerClient.jsx
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { addDays, format } from 'date-fns';
+import { addDays, format, differenceInCalendarDays } from 'date-fns';
+import { useDispatch } from 'react-redux';
+import { setDateRange } from '@/store/slices/dateRangeSlice';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import './DateRangeOverrides.css';
@@ -13,36 +15,52 @@ const DateRange = dynamic(
   { ssr: false }
 );
 
-export default function DateRangePickerClient({ onChange }) {
+export default function DateRangePickerClient() {
+  const dispatch = useDispatch();
   const [range, setRange] = useState([
-    { startDate: new Date(), endDate: addDays(new Date(), 7), key: 'selection' },
+    {
+      startDate: new Date(),
+      endDate:   addDays(new Date(), 1),
+      key:       'selection'
+    }
   ]);
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
 
-  // track small screens
-  const [isMobile, setIsMobile] = useState(false);
+  // Close on outside click
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 768px)');
-    const update = (e) => setIsMobile(e.matches);
-    update(mql);
-    mql.addEventListener('change', update);
-    return () => mql.removeEventListener('change', update);
-  }, []);
-
-  useEffect(() => {
-    function handleClickOutside(e) {
+    const handler = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
         setOpen(false);
       }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
   }, []);
 
+  // Mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 768px)');
+    const onChange = (e) => setIsMobile(e.matches);
+    onChange(mql);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
+  // When the user picks new dates:
   const handleChange = (item) => {
+    const { startDate, endDate } = item.selection;
     setRange([item.selection]);
-    if (onChange) onChange(item.selection);
+
+    // compute days difference (you can adjust +1 if you want inclusive nights)
+    const days = Math.max(
+      differenceInCalendarDays(endDate, startDate),
+      1
+    );
+
+    // dispatch into Redux
+    dispatch(setDateRange({ startDate, endDate, days }));
   };
 
   const formatted = `${format(range[0].startDate, 'yyyy-MM-dd')} → ${format(
